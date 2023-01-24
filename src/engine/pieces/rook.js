@@ -18,7 +18,7 @@ export default class Rook extends Piece {
             if (nextPlayer === undefined) {
                 moves.push(Square.at(i, location.col));
             }
-            else if (nextPlayer.player !== this.player) {
+            else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
                 moves.push(Square.at(i, location.col));
                 break;
             }
@@ -32,7 +32,7 @@ export default class Rook extends Piece {
             if (nextPlayer === undefined) {
                 moves.push(Square.at(i, location.col));
             }
-            else if (nextPlayer.player !== this.player) {
+            else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
                 moves.push(Square.at(i, location.col));
                 break;
             }
@@ -47,7 +47,7 @@ export default class Rook extends Piece {
             if (nextPlayer === undefined) {
                 moves.push(Square.at(location.row, i));
             }
-            else if (nextPlayer.player !== this.player) {
+            else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
                 moves.push(Square.at(location.row, i));
                 break;
             }
@@ -57,18 +57,19 @@ export default class Rook extends Piece {
 
         }
         for (let i = location.col - 1; i >= 0; i--) {
-            const nextPlayer = board.getPiece(Square.at(i, location.col))
+            const nextPlayer = board.getPiece(Square.at(location.row, i))
             if (nextPlayer === undefined) {
-                moves.push(Square.at(i, location.col));
+                moves.push(Square.at(location.row, i));
             }
-            else if (nextPlayer.player !== this.player) {
-                moves.push(Square.at(i, location.col));
+            else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
+                moves.push(Square.at(location.row, i));
                 break;
             }
             else if (nextPlayer.player === this.player) {
                 break;
             }
         }
+
         return moves
     }
 
