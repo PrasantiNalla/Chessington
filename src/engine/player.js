@@ -4,3 +4,4 @@ const Player = Object.freeze({
 });
 
 export default Player;
+
