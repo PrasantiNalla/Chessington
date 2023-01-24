@@ -11,7 +11,7 @@ export default class Rook extends Piece {
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         const moves = []
-
+        //if rook wants to go forward
         for (let i = location.row + 1; i <= 7; i++) {
             const nextPlayer = board.getPiece(Square.at(i, location.col))
 
@@ -26,7 +26,7 @@ export default class Rook extends Piece {
                 break;
             }
         }
-
+        // if rook wants to go backwards
         for (let i = location.row - 1; i >= 0; i--) {
             const nextPlayer = board.getPiece(Square.at(i, location.col))
             if (nextPlayer === undefined) {
@@ -41,7 +41,7 @@ export default class Rook extends Piece {
             }
 
         }
-
+        // if rook wants to go left
         for (let i = location.col + 1; i <= 7; i++) {
             const nextPlayer = board.getPiece(Square.at(location.row, i))
             if (nextPlayer === undefined) {
@@ -56,6 +56,7 @@ export default class Rook extends Piece {
             }
 
         }
+        // if rook wants to go right
         for (let i = location.col - 1; i >= 0; i--) {
             const nextPlayer = board.getPiece(Square.at(location.row, i))
             if (nextPlayer === undefined) {
