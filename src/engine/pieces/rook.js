@@ -1,7 +1,7 @@
 import Piece from './piece';
 import Square from '../square';
 import Player from '../player';
-
+import Board from '../board';
 
 export default class Rook extends Piece {
     constructor(player) {
@@ -12,30 +12,66 @@ export default class Rook extends Piece {
         let location = board.findPiece(this)
         const moves = []
 
+        for (let i = location.row + 1; i <= 7; i++) {
+            const nextPlayer = board.getPiece(Square.at(i, location.col))
 
-        if (this.player === Player.WHITE) {
-
-            for (let i = 0; i < 8; i++) {
-
-                if (i != location.row) {
-                    moves.push(Square.at(i, location.col));
-                }
-                if (i != location.col) {
-                    moves.push(Square.at(location.row, i));
-                }
+            if (nextPlayer === undefined) {
+                moves.push(Square.at(i, location.col));
             }
-        } else {
-            for (let i = 0; i < 8; i++) {
-                if (i != location.row) {
-                    moves.push(Square.at(i, location.col));
-                }
-                if (i != location.col) {
-                    moves.push(Square.at(location.row, i));
-                }
+            else if (nextPlayer.player !== this.player) {
+                moves.push(Square.at(i, location.col));
+                break;
+            }
+            else if (nextPlayer.player === this.player) {
+                break;
+            }
+        }
+
+        for (let i = location.row - 1; i >= 0; i--) {
+            const nextPlayer = board.getPiece(Square.at(i, location.col))
+            if (nextPlayer === undefined) {
+                moves.push(Square.at(i, location.col));
+            }
+            else if (nextPlayer.player !== this.player) {
+                moves.push(Square.at(i, location.col));
+                break;
+            }
+            else if (nextPlayer.player === this.player) {
+                break;
             }
 
         }
 
+        for (let i = location.col + 1; i <= 7; i++) {
+            const nextPlayer = board.getPiece(Square.at(location.row, i))
+            if (nextPlayer === undefined) {
+                moves.push(Square.at(location.row, i));
+            }
+            else if (nextPlayer.player !== this.player) {
+                moves.push(Square.at(location.row, i));
+                break;
+            }
+            else if (nextPlayer.player === this.player) {
+                break;
+            }
+
+        }
+        for (let i = location.col - 1; i >= 0; i--) {
+            const nextPlayer = board.getPiece(Square.at(i, location.col))
+            if (nextPlayer === undefined) {
+                moves.push(Square.at(i, location.col));
+            }
+            else if (nextPlayer.player !== this.player) {
+                moves.push(Square.at(i, location.col));
+                break;
+            }
+            else if (nextPlayer.player === this.player) {
+                break;
+            }
+        }
         return moves
     }
+
+
 }
+
