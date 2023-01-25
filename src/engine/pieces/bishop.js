@@ -18,9 +18,7 @@ export default class Bishop extends Piece {
         for (let i = location.row + 1; i <= 7; i++) {
             col++;
             if (col <= 7) {
-
                 const nextPlayer = board.getPiece(Square.at(i, col));
-
                 if (nextPlayer === undefined) {
                     moves.push(Square.at(i, col));
                 }
@@ -31,7 +29,6 @@ export default class Bishop extends Piece {
                 else if (nextPlayer.player === this.player) {
                     break;
                 }
-
             }
         }
         // bishop going up-left
