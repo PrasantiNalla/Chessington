@@ -72,15 +72,15 @@ export default class King extends Piece {
                 moves.push(Square.at(row - 1, col + 1));
             }
         }
-        if (row - 1 >= 0) {
-            const nextPlayerBackRow3 = board.getPiece(Square.at(row - 1, col));
-            if (nextPlayerBackRow3 === undefined || nextPlayerBackRow3.player !== this.player) {
+        if(row-1 >=0){
+        const nextPlayerBackRow3 = board.getPiece(Square.at(row - 1, col));
+        if (nextPlayerBackRow3 === undefined || nextPlayerBackRow3.player !== this.player) {
 
-                moves.push(Square.at(row - 1, col));
-            } else if (nextPlayerBackRow3.player !== this.player && nextPlayerBackRow3.constructor.name !== 'King') {
-                moves.push(Square.at(row - 1, col));
-            }
+            moves.push(Square.at(row - 1, col));
+        } else if (nextPlayerBackRow3.player !== this.player && nextPlayerBackRow3.constructor.name !== 'King') {
+            moves.push(Square.at(row - 1, col));
         }
+    }
         return moves;
     }
 }

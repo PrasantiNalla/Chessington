@@ -9,18 +9,6 @@ export default class Bishop extends Piece {
         super(player);
     }
 
-    // getPossibleMovesForward(location) {
-    //     const currentRow = location.row;
-    //     //cont currentCol = location.col;
-    //     let moves = [];
-    //     const col = location.co + 1;
-    //     for (let start = currentRow + 1; start < 8; start){
-    //         if (col < 8) {
-    //             moves.push(Square.at(start, col));
-    //             col++;
-    //         }
-    //     }
-    // }
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         const moves = []
