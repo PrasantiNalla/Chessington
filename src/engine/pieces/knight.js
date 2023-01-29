@@ -11,14 +11,14 @@ export default class Knight extends Piece {
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         const moves = []
+        let cuurentPlayer = this.player;
         function getKnightMoves(row, col) {
             if (row <= 7 && row >= 0 && col >= 0 && col <= 7) {
-                console.log(row, col)
                 const nextSquare = board.getPiece(Square.at(row, col));
                 if (nextSquare === undefined) {
                     moves.push(Square.at(row, col));
                 }
-                else if (nextSquare.player !== this.player && nextSquare.constructor.name !== 'King') {
+                else if (nextSquare.player !== cuurentPlayer && nextSquare.constructor.name !== 'King') {
                     moves.push(Square.at(row, col));
                 }
             }

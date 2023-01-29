@@ -11,12 +11,13 @@ export default class King extends Piece {
         const moves = []
         let row = location.row;
         let col = location.col;
+        let currentPlayer = this.player;
         function getKingMoves(row, col) {
             if (row <= 7 && row >= 0 && col <= 7 && col >= 0) {
                 const nextSquare = board.getPiece(Square.at(row, col));
                 if (nextSquare === undefined) {
                     moves.push(Square.at(row, col));
-                } else if (nextSquare.player !== this.player && nextSquare.constructor.name !== 'King') {
+                } else if (nextSquare.player !== currentPlayer && nextSquare.constructor.name !== 'King') {
                     moves.push(Square.at(row, col));
                 }
             }

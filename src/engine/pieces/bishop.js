@@ -9,24 +9,34 @@ export default class Bishop extends Piece {
         super(player);
     }
 
+
+
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         const moves = []
         let col = location.col;
         let row = location.row;
+        let currentPlayer = this.player;
+
+        function canMoveToNextStep(currentRow, currentCol) {
+            const nextPlayer = board.getPiece(Square.at(currentRow, currentCol))
+            if (nextPlayer === undefined) {
+                moves.push(Square.at(currentRow, currentCol));
+            }
+            else if (nextPlayer.player !== currentPlayer && nextPlayer.constructor.name !== 'King') {
+                moves.push(Square.at(currentRow, currentCol));
+                return false;
+            }
+            else if (nextPlayer.player === currentPlayer) {
+                return false;
+            }
+            return true;
+        }
         // bishop going up-right
         for (let i = location.row + 1; i <= 7; i++) {
             col++;
             if (col <= 7) {
-                const nextPlayer = board.getPiece(Square.at(i, col));
-                if (nextPlayer === undefined) {
-                    moves.push(Square.at(i, col));
-                }
-                else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
-                    moves.push(Square.at(i, col));
-                    break;
-                }
-                else if (nextPlayer.player === this.player) {
+                if (!canMoveToNextStep(i, col)) {
                     break;
                 }
             }
@@ -36,15 +46,7 @@ export default class Bishop extends Piece {
         for (let i = location.row + 1; i <= 7; i++) {
             col--;
             if (col >= 0) {
-                const nextPlayer = board.getPiece(Square.at(i, col))
-                if (nextPlayer === undefined) {
-                    moves.push(Square.at(i, col));
-                }
-                else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
-                    moves.push(Square.at(i, col));
-                    break;
-                }
-                else if (nextPlayer.player === this.player) {
+                if (!canMoveToNextStep(i, col)) {
                     break;
                 }
             }
@@ -53,18 +55,10 @@ export default class Bishop extends Piece {
         for (let i = location.col + 1; i <= 7; i++) {
             row--;
             if (row >= 0) {
-                // console.log("i'm updating" + row, i)
-                const nextPlayer = board.getPiece(Square.at(row, i))
-                if (nextPlayer === undefined) {
-                    moves.push(Square.at(row, i));
-                }
-                else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
-                    moves.push(Square.at(row, i));
+                if (!canMoveToNextStep(row, i)) {
                     break;
                 }
-                else if (nextPlayer.player === this.player) {
-                    break;
-                }
+
             }
         }
         // bishop trying move down-left
@@ -72,21 +66,11 @@ export default class Bishop extends Piece {
         for (let i = location.col - 1; i >= 0; i--) {
             row--;
             if (row >= 0) {
-                const nextPlayer = board.getPiece(Square.at(row, i))
-                if (nextPlayer === undefined) {
-                    moves.push(Square.at(row, i));
-                }
-                else if (nextPlayer.player !== this.player && nextPlayer.constructor.name !== 'King') {
-                    moves.push(Square.at(row, i));
-                    break;
-                }
-                else if (nextPlayer.player === this.player) {
+                if (!canMoveToNextStep(row, i)) {
                     break;
                 }
             }
         }
-
-
         return moves;
     }
 }
