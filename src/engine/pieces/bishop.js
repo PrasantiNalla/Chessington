@@ -9,8 +9,6 @@ export default class Bishop extends Piece {
         super(player);
     }
 
-
-
     getAvailableMoves(board) {
         let location = board.findPiece(this)
         const moves = []
